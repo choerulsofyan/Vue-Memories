@@ -21,9 +21,26 @@ const store = createStore({
                     image: 'https://thenationpress.net/imgs/2021/02/1612549734blobid1.jpg',
                     title: 'A trip into the forest', 
                     description: 'It was beautiful'
-                 }
+                }
             ]
         };
+    },
+    mutations: {
+        addMemory(state, memoryData) {
+            const newMemory = {
+                id: new Date().toISOString(),
+                title: memoryData.title,
+                image: memoryData.imageUrl,
+                description: memoryData.description
+            }
+
+            state.memories.unshift(newMemory);
+        }
+    },
+    actions: {
+        addMemory(context, memoryData) {
+            context.commit('addMemory', memoryData);
+        }
     },
     getters: {
         memories(state) {
